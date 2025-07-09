@@ -116,70 +116,32 @@ La API estará disponible en: http://127.0.0.1:8001/api/libros/
 # 🔐 Autenticación de Usuarios
 La aplicación login_project/users maneja el registro y el inicio de sesión de usuarios.
 
-login_project1>users>serilizers.py:
+![imagen](https://github.com/user-attachments/assets/e58c1944-a8a1-46b6-a9ac-6c383021df60)
 
-from rest_framework import serializers
-from django.contrib.auth.models import User
+![imagen](https://github.com/user-attachments/assets/7e5a2323-e6a1-4a10-9945-1e38b960ddd8)
 
-class UserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ['id', 'username', 'email']
+![imagen](https://github.com/user-attachments/assets/34408c01-8d8a-4086-9e76-eee8253eab2b)
+
+![imagen](https://github.com/user-attachments/assets/cf184cf6-494f-42a3-9770-1665ad3996b0)
 
 
-login_project1>users>views.py:
-
-from django.shortcuts import render
-
-Create your views here.
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated
-from .serializers import UserSerializer
-from rest_framework.permissions import AllowAny
-from rest_framework.generics import CreateAPIView
-from django.contrib.auth.models import User
-
-class ProfileView(APIView):
-    permission_classes = [IsAuthenticated]
-
-    def get(self, request):
-        user = request.user
-        serializer = UserSerializer(user)
-        return Response(serializer.data)
-
-class RegisterView(CreateAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-    permission_classes = [AllowAny]
-
-login_project1>users>urls.py:
-
-from django.urls import path
-from .views import ProfileView
-from .views import RegisterView
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-    TokenRefreshView,
-)
-
-urlpatterns = [
-    path('login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('profile/', ProfileView.as_view(), name='profile'),
-    path('register/', RegisterView.as_view(), name='register'),
-]
-
-# Peticiones en Postman (Autenticación Usuario):
+# Peticiones en Postman (Autenticación Usuarios):
 ![imagen](https://github.com/user-attachments/assets/b02ef1d3-812f-4f98-a9a1-c7f63abccd06)
 
 ![imagen](https://github.com/user-attachments/assets/88f2bb4e-2794-44c8-be5c-41119d9cdf1f)
 
 # 📚 Gestión de Libros (CRUD):
-App Libros:
+La aplicacion libros
 ![imagen](https://github.com/user-attachments/assets/63d7b03c-85c9-47bb-920e-9f94549584d0)
 
-# Peticiones en Postman (CRUD Libros):
+![imagen](https://github.com/user-attachments/assets/77fb31ed-9b20-4cd3-8be3-b364f3416396)
+
+![imagen](https://github.com/user-attachments/assets/1455de33-2783-489f-8f6a-a3e381197436)
+![imagen](https://github.com/user-attachments/assets/95ed4c28-f007-4f0a-adb1-aed45054fb65)
+![imagen](https://github.com/user-attachments/assets/6d1b58cc-a5f0-4e09-92b4-7dc8b618caa2)
+
+
+# Peticiones en Postman (Libros):
 
 
 
