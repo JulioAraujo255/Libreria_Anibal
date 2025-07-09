@@ -1,4 +1,5 @@
 Sistema de Gestión de Libros - API REST con Django
+
 Una API REST completa para la gestión de bibliotecas digitales, desarrollada con Django y Django REST Framework. Esta aplicación permite administrar libros, autores, géneros y reseñas de usuarios, incluyendo funcionalidades avanzadas de análisis de datos.
 
 📋 Características Principales
@@ -10,3 +11,4 @@ Búsqueda Avanzada: Filtros por múltiples criterios (nombre, autor, género, ca
 Recomendaciones Inteligentes: Sugerencias basadas en calificaciones por género
 Análisis de Datos: Visualizaciones con Pandas y Matplotlib
 API RESTful: Endpoints bien estructurados siguiendo estándares REST
+
