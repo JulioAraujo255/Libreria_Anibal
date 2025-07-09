@@ -5,28 +5,35 @@ Una API REST completa para la gestión de bibliotecas digitales, desarrollada co
 # 🛠️ Tecnologías Utilizadas
 
 Backend: Django 5.2.1, Django REST Framework 3.16.0
+
 Base de Datos: PostgreSQL (configurable a SQLite)
+
 Análisis de Datos: Pandas 2.3.0, Matplotlib 3.10.3
+
 Autenticación: Django REST Framework Simple JWT
+
 Lenguaje: Python 3.9+
 
 # ⚙️ Instalación paso a paso
 
 bash
+
 #1. Crear entorno virtual
 python -m venv env
+
+#2. Activar entorno virtual
 env\Scripts\activate
 
-#2. Instalar dependencias
+#3. Instalar dependencias
 pip install django djangorestframework psycopg2-binary pandas matplotlib
 
-#3. Crear proyecto Django
+#4. Crear proyecto Django
 django-admin startproject login_project
 
-#4. Crear la app principal
+#5. Crear la app principal
 python manage.py startapp libros
 
-#5 Migraciones y ejecución
+#6. Migraciones y ejecución
 python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver
@@ -69,7 +76,8 @@ python assign_genres.py
 
 # Ejecutar el Servidor
    
-bashpython manage.py runserver
+bash
+python manage.py runserver 127.0.0.1:8001
 
 La API estará disponible en: http://127.0.0.1:8001/api/libros/
 
