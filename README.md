@@ -19,30 +19,41 @@ Lenguaje: Python 3.9+
 bash
 
 #1. Crear entorno virtual
+
 python -m venv env
 
 #2. Activar entorno virtual
+
 env\Scripts\activate
 
 #3. Instalar dependencias
+
 pip install django djangorestframework psycopg2-binary pandas matplotlib
 
 #4. Crear proyecto Django
+
 django-admin startproject login_project
 
 #5. Crear la app principal
+
 python manage.py startapp libros
 
 #6. Migraciones y ejecución
+
 python manage.py makemigrations
+
 python manage.py migrate
+
 python manage.py runserver
 
 # Configuración de Base de Datos
 
 PostgreSQL:
+
 Modificar login_project/settings.py:
+
 DATABASES = {
+
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'libreriaanibal',
