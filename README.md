@@ -46,6 +46,9 @@ python manage.py migrate
 
 python manage.py runserver
 
+#7.  Para correr el servidor (Postman)
+python manage.py runserver 127.0.0.1:8001
+
 # Configuración de Base de Datos
 
 PostgreSQL:
