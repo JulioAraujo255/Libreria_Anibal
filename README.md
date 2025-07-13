@@ -121,28 +121,29 @@ Aplicaciones Principales
 # Autenticación de Usuarios
 
 La aplicación login_project/users se encarga del registro y la consulta del perfil del usuario autenticado. Para ello se implementan dos vistas principales usando Django REST Framework:
-👤 RegisterView
-
-    Permite registrar nuevos usuarios.
-
-    Se basa en el modelo incorporado User de Django.
-
-    Utiliza permisos AllowAny para que cualquier persona pueda acceder a esta vista sin autenticarse.
-
-    Hereda de CreateAPIView, por lo que acepta solicitudes POST para registrar nuevos usuarios.
-
-🔐 ProfileView
-
-    Requiere autenticación (IsAuthenticated) mediante tokens JWT.
-
-    Permite al usuario autenticado consultar sus propios datos (como id, username, email, etc.).
-
-    Retorna los datos serializados con UserSerializer.
-
-![imagen](https://github.com/user-attachments/assets/e58c1944-a8a1-46b6-a9ac-6c383021df60)
 
 El serializador define qué campos del modelo User serán visibles:
 
+![imagen](https://github.com/user-attachments/assets/e58c1944-a8a1-46b6-a9ac-6c383021df60)
+
+👤 RegisterView
+
+Permite registrar nuevos usuarios.
+
+ Se basa en el modelo incorporado User de Django.
+
+Utiliza permisos AllowAny para que cualquier persona pueda acceder a esta vista sin autenticarse.
+
+ Hereda de CreateAPIView, por lo que acepta solicitudes POST para registrar nuevos usuarios.
+
+🔐 ProfileView
+
+Requiere autenticación (IsAuthenticated) mediante tokens JWT.
+
+Permite al usuario autenticado consultar sus propios datos (como id, username, email, etc.).
+
+Retorna los datos serializados con UserSerializer.
+    
 ![imagen](https://github.com/user-attachments/assets/7e5a2323-e6a1-4a10-9945-1e38b960ddd8)
 
 Define las rutas relacionadas a usuarios:
@@ -156,17 +157,18 @@ Define las rutas relacionadas a usuarios:
 ![imagen](https://github.com/user-attachments/assets/88f2bb4e-2794-44c8-be5c-41119d9cdf1f)
 
 # Gestión de Libros (CRUD):
+
 El proyecto cuenta con una API REST completa que permite crear, leer, actualizar y eliminar datos de libros, autores, géneros y calificaciones. Todo esto se gestiona mediante ModelViewSet de Django REST Framework, lo que permite automatizar gran parte del trabajo.
 
 Define las estructuras de datos:
 
-    Autor: nombre y nacionalidad del autor.
+Autor: nombre y nacionalidad del autor.
 
-    Genero: categoría o estilo literario.
+Genero: categoría o estilo literario.
 
-    Calificacion: puntaje del libro (1 a 10) y un comentario opcional.
+Calificacion: puntaje del libro (1 a 10) y un comentario opcional.
 
-    Libro: tiene título, autor, género y una calificación.
+Libro: tiene título, autor, género y una calificación.
     
 ![imagen](https://github.com/user-attachments/assets/63d7b03c-85c9-47bb-920e-9f94549584d0)
 
@@ -187,6 +189,7 @@ Utiliza un DefaultRouter que registra automáticamente las rutas de cada recurso
 ![imagen](https://github.com/user-attachments/assets/995b627d-4af6-496c-b72b-fdad64a7a3d2)
 
 # Peticiones en Postman (Libros):
+
 Creación de Autor:
 
 ![imagen](https://github.com/user-attachments/assets/a104a952-f089-4cf1-aebe-6fe641f3ae37)
@@ -676,7 +679,6 @@ GET =  http://127.0.0.1:8001/api/libros/
 
 # 📄 Script de exportación y análisis
 
-
     exportar_libros.py
     import pandas as pd
     from libros.models import Libro
@@ -814,7 +816,7 @@ def sugerencias_por_genero(request, genero_id):
         calificacion__puntaje__gte=5  # Filtramos por calificación ≥ 5
     ).order_by('-calificacion__puntaje')
     
-Uso een Postman: http://127.0.0.1:8000/api/sugerencias/2/
+Uso en Postman: http://127.0.0.1:8000/api/sugerencias/2/
 
 Resultado:
 
