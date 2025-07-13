@@ -6,7 +6,7 @@ Una API REST completa para la gestión de bibliotecas digitales, desarrollada co
 
 Backend: Django 5.2.1, Django REST Framework 3.16.0
 
-Base de Datos: PostgreSQL (configurable a SQLite)
+Base de Datos: PostgreSQL 
 
 Análisis de Datos: Pandas 2.3.0, Matplotlib 3.10.3
 
@@ -45,10 +45,6 @@ python manage.py makemigrations
 python manage.py migrate
 
 python manage.py runserver
-
-#7.  Para correr el servidor (Postman)
-
-python manage.py runserver 127.0.0.1:8001
 
 # Configuración de Base de Datos
 
@@ -92,7 +88,7 @@ python assign_genres.py
 # Ejecutar el Servidor
    
 bash
-python manage.py runserver 127.0.0.1:8001
+python manage.py runserver 127.0.0.1:8001 (Postman)
 
 La API estará disponible en: http://127.0.0.1:8001/api/libros/
 
@@ -123,29 +119,70 @@ Aplicaciones Principales
 └── scripts/                  # Scripts de carga de datos y análisis
 
 # Autenticación de Usuarios
-La aplicación login_project/users maneja el registro y el inicio de sesión de usuarios.
+
+La aplicación login_project/users se encarga del registro y la consulta del perfil del usuario autenticado. Para ello se implementan dos vistas principales usando Django REST Framework:
+👤 RegisterView
+
+    Permite registrar nuevos usuarios.
+
+    Se basa en el modelo incorporado User de Django.
+
+    Utiliza permisos AllowAny para que cualquier persona pueda acceder a esta vista sin autenticarse.
+
+    Hereda de CreateAPIView, por lo que acepta solicitudes POST para registrar nuevos usuarios.
+
+🔐 ProfileView
+
+    Requiere autenticación (IsAuthenticated) mediante tokens JWT.
+
+    Permite al usuario autenticado consultar sus propios datos (como id, username, email, etc.).
+
+    Retorna los datos serializados con UserSerializer.
 
 ![imagen](https://github.com/user-attachments/assets/e58c1944-a8a1-46b6-a9ac-6c383021df60)
 
+El serializador define qué campos del modelo User serán visibles:
+
 ![imagen](https://github.com/user-attachments/assets/7e5a2323-e6a1-4a10-9945-1e38b960ddd8)
+
+Define las rutas relacionadas a usuarios:
 
 ![imagen](https://github.com/user-attachments/assets/34408c01-8d8a-4086-9e76-eee8253eab2b)
 
 # Peticiones en Postman (Autenticación Usuarios):
+
 ![imagen](https://github.com/user-attachments/assets/b02ef1d3-812f-4f98-a9a1-c7f63abccd06)
 
 ![imagen](https://github.com/user-attachments/assets/88f2bb4e-2794-44c8-be5c-41119d9cdf1f)
 
 # Gestión de Libros (CRUD):
-La aplicacion libros sirve para la creación, edición, consulta y eliminación de libros (con sus respectivos autores, generos y calificaciones)
+El proyecto cuenta con una API REST completa que permite crear, leer, actualizar y eliminar datos de libros, autores, géneros y calificaciones. Todo esto se gestiona mediante ModelViewSet de Django REST Framework, lo que permite automatizar gran parte del trabajo.
 
+Define las estructuras de datos:
+
+    Autor: nombre y nacionalidad del autor.
+
+    Genero: categoría o estilo literario.
+
+    Calificacion: puntaje del libro (1 a 10) y un comentario opcional.
+
+    Libro: tiene título, autor, género y una calificación.
+    
 ![imagen](https://github.com/user-attachments/assets/63d7b03c-85c9-47bb-920e-9f94549584d0)
 
+Permiten convertir los modelos en JSON para trabajar con la API.
+Se aplican a todos los modelos (Autor, Genero, Libro, Calificacion).
+
 ![imagen](https://github.com/user-attachments/assets/77fb31ed-9b20-4cd3-8be3-b364f3416396)
+
+Usamos ModelViewSet para tener el CRUD completo automáticamente (GET, POST, PUT, DELETE). Además, personalizamos el método create() para permitir cargas masivas de datos (listas de objetos).
+Esto se replica para Autor, Genero y Calificacion.
 
 ![imagen](https://github.com/user-attachments/assets/1455de33-2783-489f-8f6a-a3e381197436)
 ![imagen](https://github.com/user-attachments/assets/95ed4c28-f007-4f0a-adb1-aed45054fb65)
 ![imagen](https://github.com/user-attachments/assets/6d1b58cc-a5f0-4e09-92b4-7dc8b618caa2)
+
+Utiliza un DefaultRouter que registra automáticamente las rutas de cada recurso:
 
 ![imagen](https://github.com/user-attachments/assets/995b627d-4af6-496c-b72b-fdad64a7a3d2)
 
