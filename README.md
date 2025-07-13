@@ -151,15 +151,19 @@ La aplicacion libros sirve para la creación, edición, consulta y eliminación 
 
 # Peticiones en Postman (Libros):
 Creación de Autor:
+
 ![imagen](https://github.com/user-attachments/assets/a104a952-f089-4cf1-aebe-6fe641f3ae37)
 
 Creación de Genero:
+
 ![imagen](https://github.com/user-attachments/assets/53c4a087-e4ae-4ee7-bb63-4fcf83cf1ab4)
 
 Creación de Caificación:
+
 ![imagen](https://github.com/user-attachments/assets/d9413997-abd6-4a51-8ba1-aae697753ce3)
 
 Creación de Libro:
+
 ![imagen](https://github.com/user-attachments/assets/13eeb929-48d7-48c2-9232-b0ffeb734237)
 
 Y luego las peticiones de para edición, consultas y eliminaciones.
@@ -634,6 +638,8 @@ GET =  http://127.0.0.1:8001/api/libros/
 ]
 
 # 📄 Script de exportación y análisis
+
+
     exportar_libros.py
     import pandas as pd
     from libros.models import Libro
@@ -750,15 +756,54 @@ Se ejecuta desde la terminal con el script: python graficos_libros.py
 
 ![Grafico_5](https://github.com/user-attachments/assets/babc6750-bb9e-40ed-b3f7-c893ca35a85e)
 
-# 💡 Búsquedas sugeridas (DjangoFilterBackend)
+# 💡 Libros con mejor valoración 
 
-Filtra automáticamente por campo, y permite ordenamientos o búsquedas más precisas sin escribir lógica extra.
+Cuando el usuario pase un id de género (por ejemplo, genero_id=1), el sistema debe devolver los mejores libros (por ejemplo, puntaje ≥ 4) de ese género ordenados por calificación.
 
-    /api/libros/?autor=1
+Se agrego al proyecto:
 
-    /api/libros/?genero=2
+libros/urls.py:
 
-    /api/libros/?calificacion__gte=4
+urlpatterns = [
+    path('sugerencias/<int:genero_id>/', sugerencias_por_genero, name='sugerencias-por-genero'),
+]
+
+libros/views.py:
+
+@api_view(['GET'])
+def sugerencias_por_genero(request, genero_id):
+    libros = Libro.objects.filter(
+        genero=genero_id,
+        calificacion__puntaje__gte=5  # Filtramos por calificación ≥ 5
+    ).order_by('-calificacion__puntaje')
+    
+Uso een Postman: http://127.0.0.1:8000/api/sugerencias/2/
+
+Resultado:
+
+[
+    {
+        "id": 4,
+        "titulo": "El resplandor",
+        "autor": 2,
+        "genero": 2,
+        "calificacion": 4
+    },
+    {
+        "id": 14,
+        "titulo": "El psicoanalista",
+        "autor": 6,
+        "genero": 2,
+        "calificacion": 4
+    },
+    {
+        "id": 34,
+        "titulo": "El signo de los cuatro",
+        "autor": 4,
+        "genero": 2,
+        "calificacion": 4
+    },
+]
 
 # 📜 Licencias de herramientas usadas
 
