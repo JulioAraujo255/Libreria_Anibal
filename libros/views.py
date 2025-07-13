@@ -6,8 +6,12 @@ import requests
 from django.conf import settings
 from rest_framework.response import Response
 from rest_framework import status
-from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter
+from rest_framework.decorators import api_view
+from .models import Libro
+from .serializers import LibroSerializer
+
+
 
 # libros/views.py
 class AutorViewSet(viewsets.ModelViewSet):
@@ -59,15 +63,6 @@ class CalificacionViewSet(viewsets.ModelViewSet):
         self.perform_create(serializer)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     
-
-class LibroViewSet(viewsets.ModelViewSet):
-    queryset = Libro.objects.all()
-    serializer_class = LibroSerializer
-    filter_backends = [DjangoFilterBackend, SearchFilter]
-    filterset_fields = ['autor', 'genero', 'calificacion']
-    search_fields = ['titulo']
-
-    
 def login_view(request):
     error = None
     if request.method == 'POST':
@@ -103,3 +98,13 @@ class ProfileView(APIView):
             "username": request.user.username,
             "email": request.user.email
         })
+    
+@api_view(['GET'])
+def sugerencias_por_genero(request, genero_id):
+    libros = Libro.objects.filter(
+        genero=genero_id,
+        calificacion__puntaje__gte=5  # Filtramos por calificación ≥ 5
+    ).order_by('-calificacion__puntaje')
+    
+    serializer = LibroSerializer(libros, many=True)
+    return Response(serializer.data)
