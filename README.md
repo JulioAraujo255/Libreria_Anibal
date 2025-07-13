@@ -2,7 +2,7 @@
 
 Una API REST completa para la gestión de bibliotecas digitales, desarrollada con Django y Django REST Framework. Esta aplicación permite administrar libros, autores, géneros y reseñas de usuarios, incluyendo funcionalidades avanzadas de análisis de datos.
 
-# 🛠️ Tecnologías Utilizadas
+#  Tecnologías Utilizadas
 
 Backend: Django 5.2.1, Django REST Framework 3.16.0
 
@@ -14,7 +14,7 @@ Autenticación: Django REST Framework Simple JWT
 
 Lenguaje: Python 3.9+
 
-# ⚙️ Instalación paso a paso
+#  Instalación paso a paso
 
 bash
 
@@ -96,7 +96,7 @@ python manage.py runserver 127.0.0.1:8001
 
 La API estará disponible en: http://127.0.0.1:8001/api/libros/
 
-# 🧩 ¿Cómo funciona este sistema?
+# ¿Cómo funciona este sistema?
 
    Se registran libros, autores, géneros y calificaciones.
 
@@ -110,7 +110,7 @@ La API estará disponible en: http://127.0.0.1:8001/api/libros/
 
    Soporta carga en lote desde Postman (many=True en los serializers).
 
-# 🏗️ Arquitectura del Proyecto
+# Arquitectura del Proyecto
 
 Aplicaciones Principales
 
@@ -122,7 +122,7 @@ Aplicaciones Principales
 
 └── scripts/                  # Scripts de carga de datos y análisis
 
-# 🔐 Autenticación de Usuarios
+# Autenticación de Usuarios
 La aplicación login_project/users maneja el registro y el inicio de sesión de usuarios.
 
 ![imagen](https://github.com/user-attachments/assets/e58c1944-a8a1-46b6-a9ac-6c383021df60)
@@ -136,7 +136,7 @@ La aplicación login_project/users maneja el registro y el inicio de sesión de 
 
 ![imagen](https://github.com/user-attachments/assets/88f2bb4e-2794-44c8-be5c-41119d9cdf1f)
 
-# 📚 Gestión de Libros (CRUD):
+# Gestión de Libros (CRUD):
 La aplicacion libros sirve para la creación, edición, consulta y eliminación de libros (con sus respectivos autores, generos y calificaciones)
 
 ![imagen](https://github.com/user-attachments/assets/63d7b03c-85c9-47bb-920e-9f94549584d0)
@@ -168,7 +168,7 @@ Creación de Libro:
 
 Y luego las peticiones de para edición, consultas y eliminaciones.
 
-# 📚 Listado de libros
+# Listado de libros
 
 GET =  http://127.0.0.1:8001/api/libros/
     
@@ -756,7 +756,7 @@ Se ejecuta desde la terminal con el script: python graficos_libros.py
 
 ![Grafico_5](https://github.com/user-attachments/assets/babc6750-bb9e-40ed-b3f7-c893ca35a85e)
 
-# 💡 Libros con mejor valoración 
+# Libros con mejor valoración 
 
 Cuando el usuario pase un id de género (por ejemplo, genero_id=1), el sistema debe devolver los mejores libros (por ejemplo, puntaje ≥ 4) de ese género ordenados por calificación.
 
@@ -805,7 +805,7 @@ Resultado:
     },
 ]
 
-# 📜 Licencias de herramientas usadas
+# Licencias de herramientas usadas
 
 ![imagen](https://github.com/user-attachments/assets/2b9fe8bb-126a-4808-bcb9-049e52a00f46)
 
